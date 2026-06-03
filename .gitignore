@@ -1,0 +1,9 @@
+# Original high-res PNG files (replaced by compressed JPGs)
+assets/images/*.png
+
+# Original video (1.3GB — too large for GitHub)
+assets/video/
+
+# macOS system files
+.DS_Store
+**/.DS_Store
