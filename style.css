@@ -6,8 +6,11 @@
 /* Base */
 html {
   scroll-behavior: smooth;
-}
 
+}
+body {
+overflow-x: hidden;
+}
 *,
 *::before,
 *::after {
