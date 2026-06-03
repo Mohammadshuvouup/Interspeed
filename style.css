@@ -321,3 +321,21 @@ select option {
     pointer-events: auto !important;
   }
 }
+
+/* ===== 480px — smallest phones (iPhone SE, 375px; older Androids, 360px; 320px) ===== */
+@media (max-width: 480px) {
+  /* Prevent any element from overflowing viewport */
+  img, video, iframe { max-width: 100%; }
+
+  /* Amenity card titles — prevent text overflow */
+  .amenity-card h3 { font-size: 1rem; }
+
+  /* Stat card number — reduce size */
+  .stat-card .text-6xl { font-size: 2.5rem; }
+
+  /* Gallery images — even smaller */
+  .gallery-img { height: 120px; }
+
+  /* Feature chips — tightest size */
+  .feature-chip { font-size: 0.68rem; }
+}
