@@ -277,4 +277,47 @@ select option {
     right: 16px;
     padding: 12px 16px;
   }
+
+  /* Prevent horizontal overflow on mobile */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Amenity cards — taller on mobile for readability */
+  .amenity-card {
+    min-height: 180px;
+  }
+
+  /* Stat cards — reduce padding on mobile */
+  .stat-card {
+    padding: 1.25rem 1rem;
+  }
+
+  /* Gallery images — smaller height on mobile */
+  .gallery-img {
+    height: 140px;
+  }
+
+  /* Lightbox — full screen on mobile */
+  #lightbox img {
+    max-width: 98vw;
+    max-height: 80vh;
+  }
+
+  /* Feature chips — smaller on mobile */
+  .feature-chip {
+    font-size: 0.72rem;
+    padding: 6px 10px;
+  }
+
+  /* Marquee text — slightly smaller on mobile */
+  .marquee-inner span {
+    font-size: 9px;
+  }
+
+  /* Video player controls accessible on touch */
+  #play-overlay {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
 }
