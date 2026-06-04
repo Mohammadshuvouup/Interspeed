@@ -17,6 +17,9 @@
   <!-- AOS Animation -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css" />
 
@@ -391,6 +394,193 @@
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ===================================================
+       OWNERSHIP MODEL
+  =================================================== -->
+  <section id="ownership" class="py-14 md:py-28 px-4 md:px-6 bg-cream overflow-hidden">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- Heading -->
+      <div class="text-center mb-8 md:mb-14" data-aos="fade-up">
+        <p class="text-gold text-[10px] tracking-[0.3em] uppercase mb-3 md:mb-4">Investment Model</p>
+        <h2 class="font-serif text-navy text-3xl md:text-5xl font-light gold-line gold-line-center">
+          Own Your Share,<br>Your Way
+        </h2>
+        <p class="text-gray-500 text-sm leading-relaxed max-w-xl mx-auto mt-6 md:mt-8 px-2">
+          One share can be owned individually or jointly — split among up to 4 co-owners,
+          each holding equal rights. Flexible by design, premium by nature.
+        </p>
+      </div>
+
+      <!-- Toggle -->
+      <div class="flex justify-center gap-0 mb-10 md:mb-12" data-aos="fade-up" data-aos-delay="100">
+        <button id="toggle-split" class="ownership-tab active-tab">Split Ownership</button>
+        <button id="toggle-group" class="ownership-tab">Group Purchase</button>
+      </div>
+
+      <!-- ── Mobile Diagram (visible on < sm) ── -->
+      <div class="sm:hidden" data-aos="fade-up" data-aos-delay="200">
+
+        <!-- Share badge -->
+        <div class="flex justify-center mb-6">
+          <div class="w-24 h-24 rounded-full border-2 border-gold bg-navy flex flex-col items-center justify-center shadow-xl">
+            <span class="text-gold text-[9px] tracking-[0.2em] uppercase">1</span>
+            <span class="font-serif text-white text-xl font-light leading-none">Share</span>
+            <div class="w-6 h-[1px] bg-gold/50 mt-1"></div>
+            <span class="text-white/50 text-[8px] tracking-widest uppercase mt-1">Atlantis</span>
+          </div>
+        </div>
+
+        <!-- 2×2 owner card grid -->
+        <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto">
+          <div class="owner-card-mobile">
+            <div class="owner-card-mobile__icon">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            </div>
+            <p class="owner-card-mobile__name">Owner A</p>
+            <p class="owner-card-mobile__sub">Equal ¼ rights</p>
+          </div>
+          <div class="owner-card-mobile">
+            <div class="owner-card-mobile__icon">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            </div>
+            <p class="owner-card-mobile__name">Owner B</p>
+            <p class="owner-card-mobile__sub">Equal ¼ rights</p>
+          </div>
+          <div class="owner-card-mobile">
+            <div class="owner-card-mobile__icon">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            </div>
+            <p class="owner-card-mobile__name">Owner C</p>
+            <p class="owner-card-mobile__sub">Equal ¼ rights</p>
+          </div>
+          <div class="owner-card-mobile">
+            <div class="owner-card-mobile__icon">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            </div>
+            <p class="owner-card-mobile__name">Owner D</p>
+            <p class="owner-card-mobile__sub">Equal ¼ rights</p>
+          </div>
+        </div>
+
+        <!-- Mobile mode label -->
+        <p id="mode-text-mobile" class="text-center text-gold text-[9px] tracking-[0.15em] uppercase mt-5"></p>
+      </div>
+
+      <!-- ── Desktop Diagram (visible on sm+) ── -->
+      <div class="hidden sm:block" data-aos="fade-up" data-aos-delay="200">
+        <div class="relative flex items-center justify-center h-[420px] w-full max-w-3xl mx-auto">
+
+          <!-- SVG Lines + Pulse Rings + Traveling Dots -->
+          <svg id="ownership-svg" class="absolute inset-0 w-full h-full" style="pointer-events:none;">
+            <defs>
+              <filter id="glow-gold" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Shockwave ring: split mode -->
+            <circle id="share-pulse" cx="0" cy="0" r="0" fill="none" stroke="#c9a96e" stroke-width="1.5" opacity="0"/>
+            <!-- Assembly ring: group mode -->
+            <circle id="assemble-pulse" cx="0" cy="0" r="0" fill="none" stroke="#c9a96e" stroke-width="1.5" opacity="0"/>
+
+            <!-- Connection lines -->
+            <line id="line-a" class="ownership-line" stroke="#c9a96e" stroke-width="2" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
+            <line id="line-b" class="ownership-line" stroke="#c9a96e" stroke-width="2" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
+            <line id="line-c" class="ownership-line" stroke="#c9a96e" stroke-width="2" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
+            <line id="line-d" class="ownership-line" stroke="#c9a96e" stroke-width="2" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
+
+            <!-- Traveling parcels (dots that move along each line) -->
+            <circle id="dot-a" r="5" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
+            <circle id="dot-b" r="5" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
+            <circle id="dot-c" r="5" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
+            <circle id="dot-d" r="5" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
+          </svg>
+
+          <!-- Centre Share Node -->
+          <div class="absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <!-- Ambient pulse rings -->
+            <div class="share-ring share-ring--1" aria-hidden="true"></div>
+            <div class="share-ring share-ring--2" aria-hidden="true"></div>
+            <div id="share-node"
+                 class="relative w-36 h-36 rounded-full border-2 border-gold bg-navy flex flex-col items-center justify-center shadow-xl">
+              <span class="text-gold text-[10px] tracking-[0.2em] uppercase">1</span>
+              <span class="font-serif text-white text-3xl font-light leading-none">Share</span>
+              <div class="w-8 h-[1px] bg-gold/50 mt-2"></div>
+              <span class="text-white/50 text-[9px] tracking-widest uppercase mt-1">Atlantis</span>
+            </div>
+          </div>
+
+          <!-- Owner Node A — Top -->
+          <div class="absolute z-10 left-1/2 top-[6%] -translate-x-1/2">
+            <div id="owner-a" class="owner-node relative flex flex-col items-center">
+              <div class="w-16 h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
+                <svg class="w-7 h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              </div>
+              <span class="text-navy text-[10px] tracking-[0.12em] uppercase mt-2 font-medium whitespace-nowrap">Owner A</span>
+              <div class="owner-tooltip">Equal ¼ share rights</div>
+            </div>
+          </div>
+
+          <!-- Owner Node B — Right -->
+          <div class="absolute z-10 right-[3%] top-1/2 -translate-y-1/2">
+            <div id="owner-b" class="owner-node relative flex flex-col items-center">
+              <div class="w-16 h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
+                <svg class="w-7 h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              </div>
+              <span class="text-navy text-[10px] tracking-[0.12em] uppercase mt-2 font-medium whitespace-nowrap">Owner B</span>
+              <div class="owner-tooltip">Equal ¼ share rights</div>
+            </div>
+          </div>
+
+          <!-- Owner Node C — Bottom -->
+          <div class="absolute z-10 left-1/2 bottom-[4%] -translate-x-1/2">
+            <div id="owner-c" class="owner-node relative flex flex-col items-center">
+              <div class="w-16 h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
+                <svg class="w-7 h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              </div>
+              <span class="text-navy text-[10px] tracking-[0.12em] uppercase mt-2 font-medium whitespace-nowrap">Owner C</span>
+              <div class="owner-tooltip">Equal ¼ share rights</div>
+            </div>
+          </div>
+
+          <!-- Owner Node D — Left -->
+          <div class="absolute z-10 left-[3%] top-1/2 -translate-y-1/2">
+            <div id="owner-d" class="owner-node relative flex flex-col items-center">
+              <div class="w-16 h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
+                <svg class="w-7 h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              </div>
+              <span class="text-navy text-[10px] tracking-[0.12em] uppercase mt-2 font-medium whitespace-nowrap">Owner D</span>
+              <div class="owner-tooltip">Equal ¼ share rights</div>
+            </div>
+          </div>
+
+          <!-- Mode label -->
+          <div class="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none w-full px-2" style="bottom:-20px;">
+            <p id="mode-text" class="text-gold text-[10px] tracking-[0.25em] uppercase"></p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Info pills -->
+      <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-12 md:mt-16" data-aos="fade-up" data-aos-delay="300">
+        <div class="px-3 py-2 md:px-5 md:py-3 border border-gold/40 bg-white text-navy text-[9px] md:text-[11px] tracking-[0.1em] md:tracking-[0.15em] uppercase text-center">
+          Up to 4 co-owners per share
+        </div>
+        <div class="px-3 py-2 md:px-5 md:py-3 border border-gold/40 bg-white text-navy text-[9px] md:text-[11px] tracking-[0.1em] md:tracking-[0.15em] uppercase text-center">
+          Equal rights for all owners
+        </div>
+        <div class="px-3 py-2 md:px-5 md:py-3 border border-gold/40 bg-white text-navy text-[9px] md:text-[11px] tracking-[0.1em] md:tracking-[0.15em] uppercase text-center">
+          Individual or group entry
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1023,6 +1213,243 @@
         closeLightbox();
       }
     });
+
+    // ── Ownership Diagram ──
+    (function() {
+      const svg          = document.getElementById('ownership-svg');
+      const lines        = ['line-a','line-b','line-c','line-d'].map(id => document.getElementById(id));
+      const owners       = ['owner-a','owner-b','owner-c','owner-d'].map(id => document.getElementById(id));
+      const dots         = ['dot-a','dot-b','dot-c','dot-d'].map(id => document.getElementById(id));
+      const shareNode    = document.getElementById('share-node');
+      const sharePulse   = document.getElementById('share-pulse');
+      const assemblePulse = document.getElementById('assemble-pulse');
+      const modeTextEls  = [
+        document.getElementById('mode-text'),
+        document.getElementById('mode-text-mobile')
+      ];
+
+      function setModeText(text) {
+        modeTextEls.forEach(el => { if (el) el.textContent = text; });
+      }
+
+      function getCenter(el) {
+        const wrap = svg.parentElement.getBoundingClientRect();
+        const r    = el.getBoundingClientRect();
+        return {
+          x: r.left + r.width  / 2 - wrap.left,
+          y: r.top  + r.height / 2 - wrap.top
+        };
+      }
+
+      function setLines() {
+        // Skip when the desktop diagram is hidden (display:none → zero dimensions)
+        if (!shareNode.getBoundingClientRect().width) return;
+        const c = getCenter(shareNode);
+        owners.forEach((o, i) => {
+          const p   = getCenter(o);
+          const dx  = p.x - c.x, dy = p.y - c.y;
+          const len = Math.sqrt(dx * dx + dy * dy);
+          lines[i].setAttribute('x1', c.x); lines[i].setAttribute('y1', c.y);
+          lines[i].setAttribute('x2', p.x); lines[i].setAttribute('y2', p.y);
+          lines[i].setAttribute('stroke-dasharray', len);
+          lines[i].setAttribute('stroke-dashoffset', len);
+        });
+      }
+
+      // ── Helper: owner circle element (first child div) ──
+      function ownerCircle(i) { return owners[i].querySelector('div'); }
+
+      // ─────────────────────────────────────────────
+      //  SPLIT  —  1 Share → 4 Owners
+      // ─────────────────────────────────────────────
+      function playSplit() {
+        setModeText('1 Share — Split among up to 4 co-owners');
+
+        const all = [...lines, ...owners, ...dots, shareNode, sharePulse, assemblePulse];
+        gsap.killTweensOf(all);
+
+        // Read centre coords from already-calculated line attributes
+        const cx = parseFloat(lines[0].getAttribute('x1'));
+        const cy = parseFloat(lines[0].getAttribute('y1'));
+
+        // ── Reset ──
+        gsap.set(owners, { opacity: 0, scale: 0.4, transformOrigin: 'center center' });
+        gsap.set(lines,  { strokeDashoffset: i => lines[i].getAttribute('stroke-dasharray'), strokeWidth: 2 });
+        gsap.set(dots,   { opacity: 0, attr: { cx, cy } });
+        gsap.set(sharePulse,    { opacity: 0, attr: { cx, cy, r: 68 } });
+        gsap.set(assemblePulse, { opacity: 0 });
+
+        // ── Phase 1 — Share node bounces in ──
+        gsap.fromTo(shareNode,
+          { scale: 0.3, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.75, ease: 'back.out(2.2)' }
+        );
+
+        // ── Phase 1b — Shockwave ring expands and fades ──
+        gsap.fromTo(sharePulse,
+          { attr: { r: 68 }, opacity: 0.8 },
+          { attr: { r: 160 }, opacity: 0, duration: 1.0, delay: 0.5, ease: 'power2.out' }
+        );
+
+        // ── Phase 1c — Share node briefly "breathes" to signal it's about to split ──
+        gsap.to(shareNode, {
+          scale: 1.08, duration: 0.22, delay: 0.55, ease: 'power1.out',
+          onComplete() { gsap.to(shareNode, { scale: 1, duration: 0.3, ease: 'elastic.out(1.2, 0.4)' }); }
+        });
+
+        // ── Phase 2+3 — Lines draw, dots travel, owners arrive (staggered per line) ──
+        lines.forEach((line, i) => {
+          const baseDelay = 0.9 + i * 0.22;
+          const ox = parseFloat(line.getAttribute('x2'));
+          const oy = parseFloat(line.getAttribute('y2'));
+
+          // Line draws outward with a power ease
+          gsap.to(line, { strokeDashoffset: 0, duration: 0.55, delay: baseDelay, ease: 'power3.out' });
+
+          // Gold dot travels from centre to owner along the line
+          gsap.set(dots[i], { attr: { cx, cy }, opacity: 0 });
+          gsap.to(dots[i], {
+            opacity: 1, duration: 0.08, delay: baseDelay,
+            onComplete() {
+              gsap.to(dots[i], {
+                attr: { cx: ox, cy: oy }, duration: 0.52, ease: 'power2.inOut',
+                onComplete() { gsap.to(dots[i], { opacity: 0, duration: 0.2 }); }
+              });
+            }
+          });
+
+          // Owner node arrives after the dot lands — big elastic bounce
+          gsap.fromTo(owners[i],
+            { scale: 0.3, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.5, delay: baseDelay + 0.5, ease: 'back.out(3)' }
+          );
+
+          // Owner circle glows gold on arrival
+          gsap.fromTo(ownerCircle(i),
+            { boxShadow: '0 0 0px rgba(201,169,110,0)' },
+            {
+              boxShadow: '0 0 22px rgba(201,169,110,0.65)',
+              duration: 0.3, delay: baseDelay + 0.52,
+              onComplete() {
+                gsap.to(ownerCircle(i), { boxShadow: '0 0 6px rgba(201,169,110,0.15)', duration: 0.5 });
+              }
+            }
+          );
+        });
+
+        // ── Phase 4 — All owners pulse in sync once all have arrived ──
+        const allArrived = 0.9 + (lines.length - 1) * 0.22 + 0.5 + 0.5 + 0.1;
+        gsap.to(owners, { scale: 1.1, duration: 0.18, delay: allArrived, ease: 'power1.out', stagger: 0 });
+        gsap.to(owners, { scale: 1,   duration: 0.45, delay: allArrived + 0.18, ease: 'elastic.out(1, 0.4)', stagger: 0 });
+      }
+
+      // ─────────────────────────────────────────────
+      //  GROUP  —  4 Owners → 1 Share
+      // ─────────────────────────────────────────────
+      function playGroup() {
+        setModeText('4 People — Jointly purchase 1 Share together');
+
+        const all = [...lines, ...owners, ...dots, shareNode, sharePulse, assemblePulse];
+        gsap.killTweensOf(all);
+
+        const cx = parseFloat(lines[0].getAttribute('x1'));
+        const cy = parseFloat(lines[0].getAttribute('y1'));
+
+        // ── Reset ──
+        gsap.set(shareNode, { scale: 0.2, opacity: 0 });
+        gsap.set(owners,    { opacity: 1, scale: 1, transformOrigin: 'center center' });
+        gsap.set(dots,      { opacity: 0 });
+        gsap.set(sharePulse, { opacity: 0 });
+        gsap.set(assemblePulse, { opacity: 0, attr: { cx, cy, r: 30 } });
+        // Ensure lines are fully drawn
+        lines.forEach(line => gsap.set(line, { strokeDashoffset: 0, strokeWidth: 2 }));
+
+        // ── Phase 1 — Owners activate (scale flash), staggered ──
+        owners.forEach((o, i) => {
+          gsap.to(o, {
+            scale: 1.18, duration: 0.2, delay: i * 0.1, ease: 'power2.out',
+            onComplete() { gsap.to(o, { scale: 1, duration: 0.25, ease: 'power2.in' }); }
+          });
+          // Brief border glow to signal "ready to contribute"
+          gsap.to(ownerCircle(i), {
+            boxShadow: '0 0 18px rgba(201,169,110,0.6)',
+            duration: 0.2, delay: i * 0.1,
+            onComplete() { gsap.to(ownerCircle(i), { boxShadow: '0 0 0px rgba(201,169,110,0)', duration: 0.3 }); }
+          });
+        });
+
+        // ── Phase 2 — Dots travel inward + lines retract (staggered) ──
+        lines.forEach((line, i) => {
+          const retractDelay = 0.58 + i * 0.15;
+          const len = parseFloat(line.getAttribute('stroke-dasharray'));
+          const ox  = parseFloat(line.getAttribute('x2'));
+          const oy  = parseFloat(line.getAttribute('y2'));
+
+          // Dot travels from owner toward centre
+          gsap.set(dots[i], { attr: { cx: ox, cy: oy }, opacity: 1 });
+          gsap.to(dots[i], {
+            attr: { cx, cy }, duration: 0.48, delay: retractDelay, ease: 'power2.in',
+            onComplete() { gsap.set(dots[i], { opacity: 0 }); }
+          });
+
+          // Line retracts toward centre (dashoffset grows back)
+          gsap.to(line, { strokeDashoffset: len, duration: 0.48, delay: retractDelay, ease: 'power2.in' });
+        });
+
+        // ── Phase 3 — Share node assembles with big bounce ──
+        const assembleAt = 0.58 + (lines.length - 1) * 0.15 + 0.52;
+        gsap.fromTo(shareNode,
+          { scale: 0.2, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.75, delay: assembleAt, ease: 'back.out(2.5)' }
+        );
+
+        // ── Phase 4 — Assembly shockwave ring ──
+        gsap.fromTo(assemblePulse,
+          { attr: { cx, cy, r: 40 }, opacity: 0.8 },
+          { attr: { r: 160 }, opacity: 0, duration: 0.9, delay: assembleAt + 0.55, ease: 'power2.out' }
+        );
+
+        // ── Phase 4b — Share node celebratory micro-bounce ──
+        gsap.to(shareNode, {
+          scale: 1.1, duration: 0.2, delay: assembleAt + 0.75, ease: 'power1.out',
+          onComplete() { gsap.to(shareNode, { scale: 1, duration: 0.4, ease: 'elastic.out(1.2, 0.4)' }); }
+        });
+      }
+
+      // Initialise after layout paint
+      window.addEventListener('load', () => {
+        setLines();
+        gsap.set(shareNode, { opacity: 0, scale: 0.3 });
+        gsap.set(owners,    { opacity: 0, scale: 0.4 });
+
+        // Trigger when section scrolls into view
+        const section = document.getElementById('ownership');
+        let played = false;
+        const obs = new IntersectionObserver(entries => {
+          if (entries[0].isIntersecting && !played) {
+            played = true;
+            playSplit();
+          }
+        }, { threshold: 0.25 });
+        obs.observe(section);
+      });
+
+      window.addEventListener('resize', setLines);
+
+      // Toggle buttons
+      document.getElementById('toggle-split').addEventListener('click', function() {
+        this.classList.add('active-tab');
+        document.getElementById('toggle-group').classList.remove('active-tab');
+        setLines();
+        playSplit();
+      });
+      document.getElementById('toggle-group').addEventListener('click', function() {
+        this.classList.add('active-tab');
+        document.getElementById('toggle-split').classList.remove('active-tab');
+        setLines();
+        playGroup();
+      });
+    })();
 
     // ── Form Submit (basic) ──
     function handleSubmit(e) {
