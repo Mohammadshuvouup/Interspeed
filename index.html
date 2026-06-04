@@ -659,13 +659,21 @@
       <div class="relative group cursor-pointer" id="video-wrapper" data-aos="fade-up" data-aos-delay="150">
 
         <!-- Video element -->
-        <video id="inline-video"
-               class="w-full max-h-[45vh] sm:max-h-[60vh] md:max-h-[75vh] object-cover bg-black"
-               poster="assets/images/Building%20Elevation%2012%20(Full%20Building%20Day%20View).jpg"
-               preload="none"
-               onclick="toggleVideo()">
-          <source src="assets/video/Atlantis BY iNTERSPEED_animation by FORGE.mp4" type="video/mp4">
-        </video>
+        <!-- Poster shown until play is clicked -->
+        <div id="video-poster"
+             class="w-full aspect-video bg-black bg-cover bg-center"
+             style="background-image:url('assets/images/Building%20Elevation%2012%20(Full%20Building%20Day%20View).jpg');">
+        </div>
+
+        <!-- YouTube iframe — lazy-loaded on first play click -->
+        <div id="yt-container" class="hidden w-full aspect-video bg-black">
+          <iframe id="yt-iframe"
+                  src=""
+                  data-src="https://www.youtube.com/embed/R31lfsz5ROU?autoplay=1&rel=0&modestbranding=1"
+                  class="w-full h-full"
+                  allow="autoplay; fullscreen"
+                  allowfullscreen></iframe>
+        </div>
 
         <!-- Play / Pause overlay button -->
         <div id="play-overlay"
@@ -1125,38 +1133,24 @@
       document.body.style.overflow = '';
     }
 
-    // ── Inline Video Player ──
+    // ── Inline Video Player (YouTube) ──
     function toggleVideo() {
-      const video   = document.getElementById('inline-video');
-      const overlay = document.getElementById('play-overlay');
-      const playIcon  = document.getElementById('play-icon');
-      const pauseIcon = document.getElementById('pause-icon');
+      const poster      = document.getElementById('video-poster');
+      const ytContainer = document.getElementById('yt-container');
+      const ytIframe    = document.getElementById('yt-iframe');
+      const overlay     = document.getElementById('play-overlay');
 
-      if (video.paused) {
-        video.play();
-        overlay.style.opacity = '0';
-        overlay.style.pointerEvents = 'none';
-        playIcon.classList.add('hidden');
-        pauseIcon.classList.remove('hidden');
-      } else {
-        video.pause();
-        overlay.style.opacity = '1';
-        overlay.style.pointerEvents = 'auto';
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
+      // Hide poster and play button, reveal YouTube player
+      poster.classList.add('hidden');
+      ytContainer.classList.remove('hidden');
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+
+      // Lazy-load: set src only on first click so nothing loads on page open
+      if (!ytIframe.src || ytIframe.src === window.location.href) {
+        ytIframe.src = ytIframe.dataset.src;
       }
     }
-
-    // Show overlay again when video ends
-    document.getElementById('inline-video').addEventListener('ended', () => {
-      const overlay  = document.getElementById('play-overlay');
-      const playIcon  = document.getElementById('play-icon');
-      const pauseIcon = document.getElementById('pause-icon');
-      overlay.style.opacity = '1';
-      overlay.style.pointerEvents = 'auto';
-      playIcon.classList.remove('hidden');
-      pauseIcon.classList.add('hidden');
-    });
 
     // ── Keyboard ESC ──
     document.addEventListener('keydown', e => {
