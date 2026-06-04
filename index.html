@@ -422,61 +422,14 @@
         <button id="toggle-group" class="ownership-tab">Group Purchase</button>
       </div>
 
-      <!-- ── Mobile Diagram (visible on < sm) ── -->
-      <div class="sm:hidden" data-aos="fade-up" data-aos-delay="200">
+      <!-- ── Live Animated Diagram — all screen sizes ── -->
+      <div data-aos="fade-up" data-aos-delay="200">
 
-        <!-- Share badge -->
-        <div class="flex justify-center mb-6">
-          <div class="w-24 h-24 rounded-full border-2 border-gold bg-navy flex flex-col items-center justify-center shadow-xl">
-            <span class="text-gold text-[9px] tracking-[0.2em] uppercase">1</span>
-            <span class="font-serif text-white text-xl font-light leading-none">Share</span>
-            <div class="w-6 h-[1px] bg-gold/50 mt-1"></div>
-            <span class="text-white/50 text-[8px] tracking-widest uppercase mt-1">Atlantis</span>
-          </div>
-        </div>
-
-        <!-- 2×2 owner card grid -->
-        <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto">
-          <div class="owner-card-mobile">
-            <div class="owner-card-mobile__icon">
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-            </div>
-            <p class="owner-card-mobile__name">Owner A</p>
-            <p class="owner-card-mobile__sub">Equal ¼ rights</p>
-          </div>
-          <div class="owner-card-mobile">
-            <div class="owner-card-mobile__icon">
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-            </div>
-            <p class="owner-card-mobile__name">Owner B</p>
-            <p class="owner-card-mobile__sub">Equal ¼ rights</p>
-          </div>
-          <div class="owner-card-mobile">
-            <div class="owner-card-mobile__icon">
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-            </div>
-            <p class="owner-card-mobile__name">Owner C</p>
-            <p class="owner-card-mobile__sub">Equal ¼ rights</p>
-          </div>
-          <div class="owner-card-mobile">
-            <div class="owner-card-mobile__icon">
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-            </div>
-            <p class="owner-card-mobile__name">Owner D</p>
-            <p class="owner-card-mobile__sub">Equal ¼ rights</p>
-          </div>
-        </div>
-
-        <!-- Mobile mode label -->
-        <p id="mode-text-mobile" class="text-center text-gold text-[9px] tracking-[0.15em] uppercase mt-5"></p>
-      </div>
-
-      <!-- ── Desktop Diagram (visible on sm+) ── -->
-      <div class="hidden sm:block" data-aos="fade-up" data-aos-delay="200">
-        <div class="relative flex items-center justify-center h-[420px] w-full max-w-3xl mx-auto">
+        <!-- Radial diagram -->
+        <div class="relative flex items-center justify-center h-[290px] sm:h-[420px] w-full max-w-[340px] sm:max-w-3xl mx-auto overflow-visible">
 
           <!-- SVG Lines + Pulse Rings + Traveling Dots -->
-          <svg id="ownership-svg" class="absolute inset-0 w-full h-full" style="pointer-events:none;">
+          <svg id="ownership-svg" class="absolute inset-0 w-full h-full" style="pointer-events:none; overflow:visible;">
             <defs>
               <filter id="glow-gold" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="3.5" result="blur"/>
@@ -490,82 +443,80 @@
             <circle id="assemble-pulse" cx="0" cy="0" r="0" fill="none" stroke="#c9a96e" stroke-width="1.5" opacity="0"/>
 
             <!-- Connection lines -->
-            <line id="line-a" class="ownership-line" stroke="#c9a96e" stroke-width="2" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
-            <line id="line-b" class="ownership-line" stroke="#c9a96e" stroke-width="2" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
-            <line id="line-c" class="ownership-line" stroke="#c9a96e" stroke-width="2" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
-            <line id="line-d" class="ownership-line" stroke="#c9a96e" stroke-width="2" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
+            <line id="line-a" class="ownership-line" stroke="#c9a96e" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
+            <line id="line-b" class="ownership-line" stroke="#c9a96e" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
+            <line id="line-c" class="ownership-line" stroke="#c9a96e" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
+            <line id="line-d" class="ownership-line" stroke="#c9a96e" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.65"/>
 
-            <!-- Traveling parcels (dots that move along each line) -->
-            <circle id="dot-a" r="5" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
-            <circle id="dot-b" r="5" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
-            <circle id="dot-c" r="5" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
-            <circle id="dot-d" r="5" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
+            <!-- Traveling parcels -->
+            <circle id="dot-a" r="4" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
+            <circle id="dot-b" r="4" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
+            <circle id="dot-c" r="4" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
+            <circle id="dot-d" r="4" fill="#e8d5a3" filter="url(#glow-gold)" opacity="0"/>
           </svg>
 
           <!-- Centre Share Node -->
           <div class="absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <!-- Ambient pulse rings -->
             <div class="share-ring share-ring--1" aria-hidden="true"></div>
             <div class="share-ring share-ring--2" aria-hidden="true"></div>
             <div id="share-node"
-                 class="relative w-36 h-36 rounded-full border-2 border-gold bg-navy flex flex-col items-center justify-center shadow-xl">
-              <span class="text-gold text-[10px] tracking-[0.2em] uppercase">1</span>
-              <span class="font-serif text-white text-3xl font-light leading-none">Share</span>
-              <div class="w-8 h-[1px] bg-gold/50 mt-2"></div>
-              <span class="text-white/50 text-[9px] tracking-widest uppercase mt-1">Atlantis</span>
+                 class="relative w-20 h-20 sm:w-36 sm:h-36 rounded-full border-2 border-gold bg-navy flex flex-col items-center justify-center shadow-xl">
+              <span class="text-gold text-[8px] sm:text-[10px] tracking-[0.2em] uppercase">1</span>
+              <span class="font-serif text-white text-lg sm:text-3xl font-light leading-none">Share</span>
+              <div class="w-5 sm:w-8 h-[1px] bg-gold/50 mt-1 sm:mt-2"></div>
+              <span class="text-white/50 text-[7px] sm:text-[9px] tracking-widest uppercase mt-1">Atlantis</span>
             </div>
           </div>
 
           <!-- Owner Node A — Top -->
-          <div class="absolute z-10 left-1/2 top-[6%] -translate-x-1/2">
+          <div class="absolute z-10 left-1/2 top-0 sm:top-[6%] -translate-x-1/2">
             <div id="owner-a" class="owner-node relative flex flex-col items-center">
-              <div class="w-16 h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
-                <svg class="w-7 h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              <div class="w-10 h-10 sm:w-16 sm:h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
+                <svg class="w-5 h-5 sm:w-7 sm:h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
               </div>
-              <span class="text-navy text-[10px] tracking-[0.12em] uppercase mt-2 font-medium whitespace-nowrap">Owner A</span>
-              <div class="owner-tooltip">Equal ¼ share rights</div>
+              <span class="text-navy text-[8px] sm:text-[10px] tracking-[0.1em] sm:tracking-[0.12em] uppercase mt-1 sm:mt-2 font-medium whitespace-nowrap">Owner A</span>
+              <div class="owner-tooltip hidden sm:block">Equal ¼ share rights</div>
             </div>
           </div>
 
           <!-- Owner Node B — Right -->
-          <div class="absolute z-10 right-[3%] top-1/2 -translate-y-1/2">
+          <div class="absolute z-10 right-0 sm:right-[3%] top-1/2 -translate-y-1/2">
             <div id="owner-b" class="owner-node relative flex flex-col items-center">
-              <div class="w-16 h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
-                <svg class="w-7 h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              <div class="w-10 h-10 sm:w-16 sm:h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
+                <svg class="w-5 h-5 sm:w-7 sm:h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
               </div>
-              <span class="text-navy text-[10px] tracking-[0.12em] uppercase mt-2 font-medium whitespace-nowrap">Owner B</span>
-              <div class="owner-tooltip">Equal ¼ share rights</div>
+              <span class="text-navy text-[8px] sm:text-[10px] tracking-[0.1em] sm:tracking-[0.12em] uppercase mt-1 sm:mt-2 font-medium whitespace-nowrap">Owner B</span>
+              <div class="owner-tooltip hidden sm:block">Equal ¼ share rights</div>
             </div>
           </div>
 
           <!-- Owner Node C — Bottom -->
-          <div class="absolute z-10 left-1/2 bottom-[4%] -translate-x-1/2">
+          <div class="absolute z-10 left-1/2 bottom-0 sm:bottom-[4%] -translate-x-1/2">
             <div id="owner-c" class="owner-node relative flex flex-col items-center">
-              <div class="w-16 h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
-                <svg class="w-7 h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              <div class="w-10 h-10 sm:w-16 sm:h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
+                <svg class="w-5 h-5 sm:w-7 sm:h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
               </div>
-              <span class="text-navy text-[10px] tracking-[0.12em] uppercase mt-2 font-medium whitespace-nowrap">Owner C</span>
-              <div class="owner-tooltip">Equal ¼ share rights</div>
+              <span class="text-navy text-[8px] sm:text-[10px] tracking-[0.1em] sm:tracking-[0.12em] uppercase mt-1 sm:mt-2 font-medium whitespace-nowrap">Owner C</span>
+              <div class="owner-tooltip hidden sm:block">Equal ¼ share rights</div>
             </div>
           </div>
 
           <!-- Owner Node D — Left -->
-          <div class="absolute z-10 left-[3%] top-1/2 -translate-y-1/2">
+          <div class="absolute z-10 left-0 sm:left-[3%] top-1/2 -translate-y-1/2">
             <div id="owner-d" class="owner-node relative flex flex-col items-center">
-              <div class="w-16 h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
-                <svg class="w-7 h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              <div class="w-10 h-10 sm:w-16 sm:h-16 rounded-full border border-gold/60 bg-white flex items-center justify-center shadow-md">
+                <svg class="w-5 h-5 sm:w-7 sm:h-7 text-navy/70" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
               </div>
-              <span class="text-navy text-[10px] tracking-[0.12em] uppercase mt-2 font-medium whitespace-nowrap">Owner D</span>
-              <div class="owner-tooltip">Equal ¼ share rights</div>
+              <span class="text-navy text-[8px] sm:text-[10px] tracking-[0.1em] sm:tracking-[0.12em] uppercase mt-1 sm:mt-2 font-medium whitespace-nowrap">Owner D</span>
+              <div class="owner-tooltip hidden sm:block">Equal ¼ share rights</div>
             </div>
           </div>
 
-          <!-- Mode label -->
-          <div class="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none w-full px-2" style="bottom:-20px;">
-            <p id="mode-text" class="text-gold text-[10px] tracking-[0.25em] uppercase"></p>
-          </div>
-
         </div>
+
+        <!-- Mode label — outside the relative container so it never clips -->
+        <p id="mode-text" class="text-center text-gold text-[9px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.25em] uppercase mt-4 px-4 min-h-[18px]"></p>
+
       </div>
 
       <!-- Info pills -->
@@ -1223,13 +1174,16 @@
       const shareNode    = document.getElementById('share-node');
       const sharePulse   = document.getElementById('share-pulse');
       const assemblePulse = document.getElementById('assemble-pulse');
-      const modeTextEls  = [
-        document.getElementById('mode-text'),
-        document.getElementById('mode-text-mobile')
-      ];
+      const modeTextEl = document.getElementById('mode-text');
 
       function setModeText(text) {
-        modeTextEls.forEach(el => { if (el) el.textContent = text; });
+        if (modeTextEl) modeTextEl.textContent = text;
+      }
+
+      // Returns the live radius of the share node (adapts to mobile/desktop size)
+      function shareRadius() {
+        const r = shareNode.getBoundingClientRect();
+        return Math.min(r.width, r.height) / 2;
       }
 
       function getCenter(el) {
@@ -1242,8 +1196,7 @@
       }
 
       function setLines() {
-        // Skip when the desktop diagram is hidden (display:none → zero dimensions)
-        if (!shareNode.getBoundingClientRect().width) return;
+        if (!shareNode.getBoundingClientRect().width) return; // safety guard
         const c = getCenter(shareNode);
         owners.forEach((o, i) => {
           const p   = getCenter(o);
@@ -1276,7 +1229,7 @@
         gsap.set(owners, { opacity: 0, scale: 0.4, transformOrigin: 'center center' });
         gsap.set(lines,  { strokeDashoffset: i => lines[i].getAttribute('stroke-dasharray'), strokeWidth: 2 });
         gsap.set(dots,   { opacity: 0, attr: { cx, cy } });
-        gsap.set(sharePulse,    { opacity: 0, attr: { cx, cy, r: 68 } });
+        gsap.set(sharePulse,    { opacity: 0, attr: { cx, cy, r: 0 } });
         gsap.set(assemblePulse, { opacity: 0 });
 
         // ── Phase 1 — Share node bounces in ──
@@ -1285,10 +1238,11 @@
           { scale: 1, opacity: 1, duration: 0.75, ease: 'back.out(2.2)' }
         );
 
-        // ── Phase 1b — Shockwave ring expands and fades ──
+        // ── Phase 1b — Shockwave ring expands and fades (radius adapts to screen size) ──
+        const sr = shareRadius();
         gsap.fromTo(sharePulse,
-          { attr: { r: 68 }, opacity: 0.8 },
-          { attr: { r: 160 }, opacity: 0, duration: 1.0, delay: 0.5, ease: 'power2.out' }
+          { attr: { r: sr }, opacity: 0.8 },
+          { attr: { r: sr * 2.3 }, opacity: 0, duration: 1.0, delay: 0.5, ease: 'power2.out' }
         );
 
         // ── Phase 1c — Share node briefly "breathes" to signal it's about to split ──
@@ -1360,7 +1314,8 @@
         gsap.set(owners,    { opacity: 1, scale: 1, transformOrigin: 'center center' });
         gsap.set(dots,      { opacity: 0 });
         gsap.set(sharePulse, { opacity: 0 });
-        gsap.set(assemblePulse, { opacity: 0, attr: { cx, cy, r: 30 } });
+        const sr2 = shareRadius();
+        gsap.set(assemblePulse, { opacity: 0, attr: { cx, cy, r: sr2 * 0.55 } });
         // Ensure lines are fully drawn
         lines.forEach(line => gsap.set(line, { strokeDashoffset: 0, strokeWidth: 2 }));
 
@@ -1403,10 +1358,10 @@
           { scale: 1, opacity: 1, duration: 0.75, delay: assembleAt, ease: 'back.out(2.5)' }
         );
 
-        // ── Phase 4 — Assembly shockwave ring ──
+        // ── Phase 4 — Assembly shockwave ring (radius adapts to screen size) ──
         gsap.fromTo(assemblePulse,
-          { attr: { cx, cy, r: 40 }, opacity: 0.8 },
-          { attr: { r: 160 }, opacity: 0, duration: 0.9, delay: assembleAt + 0.55, ease: 'power2.out' }
+          { attr: { cx, cy, r: sr2 * 0.55 }, opacity: 0.8 },
+          { attr: { r: sr2 * 2.3 }, opacity: 0, duration: 0.9, delay: assembleAt + 0.55, ease: 'power2.out' }
         );
 
         // ── Phase 4b — Share node celebratory micro-bounce ──

@@ -299,14 +299,20 @@ select option {
   transform: translate(-50%, -50%);
   animation: share-ring-pulse 3.2s ease-out infinite;
 }
+/* Mobile-first sizes (share node = w-20 = 80px) */
 .share-ring--1 {
-  width: 156px; height: 156px;
+  width: 96px; height: 96px;
   animation-delay: 0s;
 }
 .share-ring--2 {
-  width: 184px; height: 184px;
+  width: 116px; height: 116px;
   animation-delay: 1.2s;
   opacity: 0.2;
+}
+/* Desktop sizes (share node = sm:w-36 = 144px) */
+@media (min-width: 640px) {
+  .share-ring--1 { width: 156px; height: 156px; }
+  .share-ring--2 { width: 184px; height: 184px; }
 }
 
 /* ── Ownership Section ── */
