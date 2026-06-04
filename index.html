@@ -665,19 +665,14 @@
              style="background-image:url('assets/images/Building%20Elevation%2012%20(Full%20Building%20Day%20View).jpg');">
         </div>
 
-        <!-- YouTube iframe — lazy-loaded on first play click -->
+        <!-- YouTube player container — IFrame API injects the iframe here -->
         <div id="yt-container" class="hidden w-full aspect-video bg-black">
-          <iframe id="yt-iframe"
-                  src=""
-                  data-src="https://www.youtube.com/embed/R31lfsz5ROU?autoplay=1&rel=0&modestbranding=1"
-                  class="w-full h-full"
-                  allow="autoplay; fullscreen"
-                  allowfullscreen></iframe>
+          <div id="yt-player" class="w-full h-full"></div>
         </div>
 
-        <!-- Play / Pause overlay button -->
+        <!-- Play / Pause overlay — always present; transparent while playing to capture pause clicks -->
         <div id="play-overlay"
-             class="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300"
+             class="absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-300 cursor-pointer"
              onclick="toggleVideo()">
           <div class="w-20 h-20 rounded-full bg-gold/90 flex items-center justify-center shadow-2xl
                       group-hover:scale-110 transition-transform duration-300">
@@ -689,19 +684,6 @@
 
         <!-- Gold border accent -->
         <div class="absolute inset-0 border border-gold/20 pointer-events-none"></div>
-
-        <!-- Stop button — visible while video is playing -->
-        <button id="stop-btn"
-                class="hidden absolute bottom-4 right-4 z-20 flex items-center gap-2
-                       bg-navy/80 hover:bg-navy text-gold border border-gold/40
-                       text-[10px] tracking-[0.12em] uppercase px-4 py-2
-                       transition-colors duration-200"
-                onclick="stopVideo()">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 6h12v12H6z"/>
-          </svg>
-          Stop
-        </button>
       </div>
 
     </div>
@@ -1143,44 +1125,63 @@
       document.body.style.overflow = '';
     }
 
-    // ── Inline Video Player (YouTube) ──
-    function stopVideo() {
-      const ytIframe    = document.getElementById('yt-iframe');
-      const ytContainer = document.getElementById('yt-container');
-      const poster      = document.getElementById('video-poster');
-      const overlay     = document.getElementById('play-overlay');
-      const stopBtn     = document.getElementById('stop-btn');
+    // ── Inline Video Player — YouTube IFrame API ──
+    var ytPlayer = null;
 
-      // Stop video by clearing src (unloads the YouTube player)
-      ytIframe.src = '';
+    // Called automatically by the YouTube IFrame API script when it's ready
+    function onYouTubeIframeAPIReady() {
+      // API is available — player will be created on first click (lazy init)
+    }
 
-      // Hide player, restore poster and play button
-      ytContainer.classList.add('hidden');
-      poster.classList.remove('hidden');
-      overlay.style.opacity = '1';
-      overlay.style.pointerEvents = 'auto';
-      stopBtn.classList.add('hidden');
+    // Fires whenever the YouTube player state changes
+    function onPlayerStateChange(event) {
+      const overlay  = document.getElementById('play-overlay');
+      const playIcon = document.getElementById('play-icon');
+      if (event.data === YT.PlayerState.PLAYING) {
+        // Video is playing — make overlay transparent, hide the play icon
+        overlay.classList.add('yt-playing');
+        playIcon.classList.add('hidden');
+      } else {
+        // Paused / ended / buffering — show the play icon again
+        overlay.classList.remove('yt-playing');
+        playIcon.classList.remove('hidden');
+      }
     }
 
     function toggleVideo() {
       const poster      = document.getElementById('video-poster');
       const ytContainer = document.getElementById('yt-container');
-      const ytIframe    = document.getElementById('yt-iframe');
-      const overlay     = document.getElementById('play-overlay');
 
-      // Hide poster and play button, reveal YouTube player
-      poster.classList.add('hidden');
-      ytContainer.classList.remove('hidden');
-      overlay.style.opacity = '0';
-      overlay.style.pointerEvents = 'none';
+      if (!poster.classList.contains('hidden')) {
+        // ── First click: show container and load the YouTube IFrame API ──
+        poster.classList.add('hidden');
+        ytContainer.classList.remove('hidden');
 
-      // Lazy-load: set src only on first click so nothing loads on page open
-      if (!ytIframe.src || ytIframe.src === window.location.href) {
-        ytIframe.src = ytIframe.dataset.src;
+        if (!ytPlayer) {
+          // Dynamically load the IFrame API script (one-time)
+          var tag = document.createElement('script');
+          tag.src = 'https://www.youtube.com/iframe_api';
+          document.head.appendChild(tag);
+
+          // Once the API is ready, create the player inside #yt-player
+          window.onYouTubeIframeAPIReady = function() {
+            ytPlayer = new YT.Player('yt-player', {
+              videoId: 'R31lfsz5ROU',
+              playerVars: { autoplay: 1, rel: 0, modestbranding: 1 },
+              events: { onStateChange: onPlayerStateChange }
+            });
+          };
+        }
+        return;
       }
 
-      // Show the stop button
-      document.getElementById('stop-btn').classList.remove('hidden');
+      // ── Subsequent clicks: toggle play / pause ──
+      if (!ytPlayer) return;
+      if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+        ytPlayer.pauseVideo();
+      } else {
+        ytPlayer.playVideo();
+      }
     }
 
     // ── Keyboard ESC ──

@@ -195,6 +195,12 @@ overflow-x: hidden;
   background: linear-gradient(135deg, rgba(26, 31, 46, 0.72) 0%, rgba(26, 31, 46, 0.28) 100%);
 }
 
+/* When YouTube video is playing — overlay turns invisible so the player shows through,
+   but it stays in the DOM to capture click-to-pause */
+#play-overlay.yt-playing {
+  background: transparent;
+}
+
 /* ── Inline video player ── */
 #play-overlay {
   transition: opacity 0.35s ease;
