@@ -689,6 +689,19 @@
 
         <!-- Gold border accent -->
         <div class="absolute inset-0 border border-gold/20 pointer-events-none"></div>
+
+        <!-- Stop button — visible while video is playing -->
+        <button id="stop-btn"
+                class="hidden absolute bottom-4 right-4 z-20 flex items-center gap-2
+                       bg-navy/80 hover:bg-navy text-gold border border-gold/40
+                       text-[10px] tracking-[0.12em] uppercase px-4 py-2
+                       transition-colors duration-200"
+                onclick="stopVideo()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 6h12v12H6z"/>
+          </svg>
+          Stop
+        </button>
       </div>
 
     </div>
@@ -1131,6 +1144,24 @@
     }
 
     // ── Inline Video Player (YouTube) ──
+    function stopVideo() {
+      const ytIframe    = document.getElementById('yt-iframe');
+      const ytContainer = document.getElementById('yt-container');
+      const poster      = document.getElementById('video-poster');
+      const overlay     = document.getElementById('play-overlay');
+      const stopBtn     = document.getElementById('stop-btn');
+
+      // Stop video by clearing src (unloads the YouTube player)
+      ytIframe.src = '';
+
+      // Hide player, restore poster and play button
+      ytContainer.classList.add('hidden');
+      poster.classList.remove('hidden');
+      overlay.style.opacity = '1';
+      overlay.style.pointerEvents = 'auto';
+      stopBtn.classList.add('hidden');
+    }
+
     function toggleVideo() {
       const poster      = document.getElementById('video-poster');
       const ytContainer = document.getElementById('yt-container');
@@ -1147,6 +1178,9 @@
       if (!ytIframe.src || ytIframe.src === window.location.href) {
         ytIframe.src = ytIframe.dataset.src;
       }
+
+      // Show the stop button
+      document.getElementById('stop-btn').classList.remove('hidden');
     }
 
     // ── Keyboard ESC ──
