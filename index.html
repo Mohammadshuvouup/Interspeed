@@ -883,26 +883,37 @@
             Fill in your details and our team will get back to you within 24 hours with all the information you need.
           </p>
           <form class="space-y-5" onsubmit="handleSubmit(event)">
+
+            <!-- Web3Forms config -->
+            <input type="hidden" name="access_key" value="f58578a5-6d5c-42a9-85f1-59e991b7d0ce">
+            <input type="hidden" name="subject" value="New Inquiry — Atlantis by Interspeed">
+            <input type="hidden" name="from_name" value="Atlantis Website">
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input type="text"
+                     name="name"
                      placeholder="Your Full Name"
                      required
                      class="form-input bg-white/5 border border-white/20 text-white placeholder-white/35 px-5 py-3.5 w-full text-sm focus:border-gold focus:outline-none transition-colors">
               <input type="tel"
+                     name="phone"
                      placeholder="Your Phone Number"
                      required
                      class="form-input bg-white/5 border border-white/20 text-white placeholder-white/35 px-5 py-3.5 w-full text-sm focus:border-gold focus:outline-none transition-colors">
             </div>
             <input type="email"
+                   name="email"
                    placeholder="Your Email Address"
                    class="form-input bg-white/5 border border-white/20 text-white placeholder-white/35 px-5 py-3.5 w-full text-sm focus:border-gold focus:outline-none transition-colors">
-            <select class="form-input bg-white/5 border border-white/20 text-white/60 px-5 py-3.5 w-full text-sm focus:border-gold focus:outline-none transition-colors appearance-none cursor-pointer"
+            <select name="configuration"
+                    class="form-input bg-white/5 border border-white/20 text-white/60 px-5 py-3.5 w-full text-sm focus:border-gold focus:outline-none transition-colors appearance-none cursor-pointer"
                     style="background-color: transparent;">
               <option value="" style="background:#1a1f2e;">Choose Configuration</option>
               <option value="3bed" style="background:#1a1f2e;">3-Bedroom — 2,650 SQFT</option>
               <option value="4bed" style="background:#1a1f2e;">4-Bedroom — 2,650 SQFT</option>
             </select>
             <textarea rows="4"
+                      name="message"
                       placeholder="Your Message (Optional)"
                       class="form-input bg-white/5 border border-white/20 text-white placeholder-white/35 px-5 py-3.5 w-full text-sm focus:border-gold focus:outline-none transition-colors resize-none">
             </textarea>
@@ -1402,18 +1413,37 @@
     })();
 
     // ── Form Submit (basic) ──
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent = 'Thank You! We\'ll be in touch.';
-      btn.classList.replace('bg-gold', 'bg-green-600');
-      btn.classList.replace('text-navy', 'text-white');
-      setTimeout(() => {
-        btn.textContent = 'Send Inquiry';
-        btn.classList.replace('bg-green-600', 'bg-gold');
-        btn.classList.replace('text-white', 'text-navy');
-        e.target.reset();
-      }, 4000);
+      const btn  = e.target.querySelector('button[type="submit"]');
+      const data = new FormData(e.target);
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+        const json = await res.json();
+
+        if (json.success) {
+          btn.textContent = 'Thank You! We\'ll be in touch.';
+          btn.classList.replace('bg-gold', 'bg-green-600');
+          btn.classList.replace('text-navy', 'text-white');
+          e.target.reset();
+          setTimeout(() => {
+            btn.textContent = 'Send Inquiry';
+            btn.classList.replace('bg-green-600', 'bg-gold');
+            btn.classList.replace('text-white', 'text-navy');
+            btn.disabled = false;
+          }, 4000);
+        } else {
+          btn.textContent = 'Something went wrong. Try again.';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Network error. Try again.';
+        btn.disabled = false;
+      }
     }
   </script>
 
