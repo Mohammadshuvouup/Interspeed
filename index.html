@@ -882,13 +882,17 @@
           <p class="text-white/50 text-sm mb-8 leading-relaxed">
             Fill in your details and our team will get back to you within 24 hours with all the information you need.
           </p>
-          <form class="space-y-5" onsubmit="handleSubmit(event)">
+          <form class="space-y-5"
+                action="https://api.web3forms.com/submit"
+                method="POST"
+                onsubmit="handleSubmit(event)">
 
             <!-- Web3Forms config -->
             <input type="hidden" name="access_key" value="f58578a5-6d5c-42a9-85f1-59e991b7d0ce">
             <input type="hidden" name="subject" value="New Inquiry — Atlantis by Interspeed">
             <input type="hidden" name="from_name" value="Atlantis Website">
-            <input type="hidden" name="_template" value="table">
+            <!-- Spam honeypot — must stay unchecked -->
+            <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input type="text"
