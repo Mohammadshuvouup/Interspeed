@@ -671,7 +671,7 @@
                   src=""
                   data-src="https://www.youtube.com/embed/R31lfsz5ROU?autoplay=1&rel=0&modestbranding=1"
                   class="w-full h-full"
-                  allow="autoplay; fullscreen"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowfullscreen></iframe>
         </div>
 
@@ -1172,9 +1172,10 @@
       overlay.style.pointerEvents = 'none';
       document.getElementById('video-wrapper').classList.add('playing');
 
-      // Lazy-load: set src only on first click so nothing loads on page open
-      if (!ytIframe.src || ytIframe.src === window.location.href) {
+      // Lazy-load: set src only on first click using a reliable data flag
+      if (!ytIframe.dataset.loaded) {
         ytIframe.src = ytIframe.dataset.src;
+        ytIframe.dataset.loaded = 'true';
       }
     }
 
