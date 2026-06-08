@@ -782,18 +782,20 @@
       <div class="grid md:grid-cols-2 gap-8 md:gap-14 items-start">
         <!-- Map -->
         <div class="flex flex-col gap-3">
-          <div class="h-72 md:h-[420px] w-full overflow-hidden shadow-lg">
-            <iframe
-              src="https://maps.google.com/maps?q=23.803458,90.438838&z=18&output=embed"
-              width="100%"
-              height="100%"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Atlantis Location Map">
-            </iframe>
-          </div>
+          <a href="https://maps.app.goo.gl/ZLMGivNnyV8MD2FD8"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="block relative group overflow-hidden shadow-lg">
+            <img src="assets/images/map-location.png"
+                 alt="Atlantis Location — Road No. 49, Bashundhara, Dhaka"
+                 class="w-full h-72 md:h-[420px] object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]">
+            <!-- Hover overlay -->
+            <div class="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-all duration-300 flex items-center justify-center">
+              <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-navy/80 text-gold text-[10px] tracking-[0.2em] uppercase px-5 py-3 border border-gold/40">
+                Open in Google Maps
+              </div>
+            </div>
+          </a>
           <!-- Open in Google Maps button -->
           <a href="https://maps.app.goo.gl/ZLMGivNnyV8MD2FD8"
              target="_blank"
