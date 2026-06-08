@@ -781,17 +781,30 @@
 
       <div class="grid md:grid-cols-2 gap-8 md:gap-14 items-start">
         <!-- Map -->
-        <div class="h-72 md:h-[460px] w-full overflow-hidden shadow-lg">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.3!2d90.4355!3d23.8137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c793cfc8c1ab%3A0xdfb8ef2ee50bd57e!2sBashundhara%20I%20Block!5e0!3m2!1sen!2sbd!4v1700000000000"
-            width="100%"
-            height="100%"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Atlantis Location Map">
-          </iframe>
+        <div class="flex flex-col gap-3">
+          <div class="h-72 md:h-[420px] w-full overflow-hidden shadow-lg">
+            <iframe
+              src="https://maps.google.com/maps?q=23.803458,90.438838&z=18&output=embed"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Atlantis Location Map">
+            </iframe>
+          </div>
+          <!-- Open in Google Maps button -->
+          <a href="https://maps.app.goo.gl/ZLMGivNnyV8MD2FD8"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="flex items-center justify-center gap-2 w-full py-3 border border-gold/50 text-navy hover:bg-gold hover:text-navy hover:border-gold transition-all duration-300 text-[10px] tracking-[0.2em] uppercase font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            Open in Google Maps
+          </a>
         </div>
 
         <!-- Location Details -->
