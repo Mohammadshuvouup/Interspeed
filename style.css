@@ -139,6 +139,12 @@ overflow-x: hidden;
   background-color: #c9a96e;
   color: #1a1f2e;
 }
+.feature-chip-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  stroke: currentColor;
+}
 
 /* ── Gallery Tabs ── */
 .tab-btn {
