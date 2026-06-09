@@ -153,6 +153,13 @@
           </svg>
           Watch Film
         </a>
+        <button onclick="openBrochureModal()"
+                class="px-10 py-4 border border-gold/70 text-gold hover:bg-gold hover:text-navy tracking-[0.18em] uppercase text-xs transition-all duration-300 flex items-center gap-2 justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2"/>
+          </svg>
+          Download Brochure
+        </button>
       </div>
     </div>
 
@@ -1591,7 +1598,167 @@
         setTimeout(() => setBtnState('idle'), 3000);
       }
     }
+
+    // ── Brochure Modal ──
+    function openBrochureModal() {
+      const modal = document.getElementById('brochure-modal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBrochureModal() {
+      const modal = document.getElementById('brochure-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+    }
+
+    function setBrochureBtnState(state) {
+      const btn     = document.getElementById('brochure-submit-btn');
+      const spinner = document.getElementById('brochure-spinner');
+      const check   = document.getElementById('brochure-check');
+      const label   = document.getElementById('brochure-btn-label');
+      spinner.classList.add('hidden');
+      check.classList.add('hidden');
+      btn.disabled = false;
+      btn.classList.remove('opacity-60', 'bg-green-500', 'bg-red-500', 'text-white');
+      btn.classList.add('bg-gold', 'text-navy');
+      if (state === 'loading') {
+        spinner.classList.remove('hidden');
+        label.textContent = 'Processing…';
+        btn.disabled = true;
+        btn.classList.add('opacity-60');
+      } else if (state === 'success') {
+        check.classList.remove('hidden');
+        label.textContent = 'Downloading…';
+        btn.classList.remove('bg-gold', 'text-navy');
+        btn.classList.add('bg-green-500', 'text-white');
+      } else {
+        label.textContent = 'Submit & Download Brochure';
+      }
+    }
+
+    async function handleBrochureSubmit(e) {
+      e.preventDefault();
+      setBrochureBtnState('loading');
+      const data = new FormData(e.target);
+      try {
+        const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+        const json = await res.json();
+        if (json.success) {
+          setBrochureBtnState('success');
+          // Trigger PDF download
+          document.getElementById('brochure-dl-link').click();
+          setTimeout(() => {
+            closeBrochureModal();
+            e.target.reset();
+            setBrochureBtnState('idle');
+            showToast('Brochure is downloading. We'll be in touch soon!', 'success');
+          }, 1200);
+        } else {
+          setBrochureBtnState('idle');
+          showToast('Something went wrong. Please try again.', 'error');
+        }
+      } catch {
+        setBrochureBtnState('idle');
+        showToast('Network error. Please check your connection.', 'error');
+      }
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBrochureModal();
+    });
   </script>
+
+  <!-- ── Brochure Download Modal ── -->
+  <div id="brochure-modal"
+       class="brochure-modal fixed inset-0 z-[400] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-navy/80 backdrop-blur-sm" onclick="closeBrochureModal()"></div>
+
+    <!-- Card -->
+    <div class="brochure-modal-card relative w-full max-w-md bg-navy border border-gold/30 shadow-2xl p-8 md:p-10">
+      <!-- Close -->
+      <button onclick="closeBrochureModal()"
+              class="absolute top-4 right-4 text-gold/60 hover:text-gold transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- Heading -->
+      <p class="text-gold text-[10px] tracking-[0.3em] uppercase mb-2">Interspeed Developments</p>
+      <h3 class="font-serif text-white text-2xl md:text-3xl font-light mb-1">Get The Brochure</h3>
+      <div class="w-10 h-[1px] bg-gold mb-6"></div>
+      <p class="text-white/50 text-xs leading-relaxed mb-7">Fill in your details to receive the full project brochure. It will download instantly after submission.</p>
+
+      <!-- Form -->
+      <form id="brochure-form"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            onsubmit="handleBrochureSubmit(event)"
+            class="space-y-4">
+
+        <!-- Web3Forms config -->
+        <input type="hidden" name="access_key" value="f58578a5-6d5c-42a9-85f1-59e991b7d0ce">
+        <input type="hidden" name="subject" value="Brochure Download Request — Atlantis by Interspeed">
+        <input type="hidden" name="from_name" value="Atlantis Website">
+        <input type="hidden" name="_template" value="table">
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none">
+
+        <!-- Name + Phone -->
+        <div class="grid grid-cols-2 gap-3">
+          <input type="text" name="name" placeholder="Your Name *" required
+                 class="brochure-input w-full px-4 py-3 bg-transparent border border-white/20 text-white placeholder-white/40 text-xs tracking-wide focus:border-gold focus:outline-none transition-colors">
+          <input type="tel" name="phone" placeholder="Mobile Number *" required
+                 class="brochure-input w-full px-4 py-3 bg-transparent border border-white/20 text-white placeholder-white/40 text-xs tracking-wide focus:border-gold focus:outline-none transition-colors">
+        </div>
+
+        <!-- Email -->
+        <input type="email" name="email" placeholder="Your Email *" required
+               class="brochure-input w-full px-4 py-3 bg-transparent border border-white/20 text-white placeholder-white/40 text-xs tracking-wide focus:border-gold focus:outline-none transition-colors">
+
+        <!-- Configuration + Budget -->
+        <div class="grid grid-cols-2 gap-3">
+          <select name="configuration"
+                  class="brochure-select w-full px-4 py-3 bg-navy border border-white/20 text-white/70 text-xs tracking-wide focus:border-gold focus:outline-none transition-colors appearance-none">
+            <option value="" disabled selected>Choose Configuration</option>
+            <option value="3-Bedroom">3-Bedroom · 2,650 SQFT</option>
+            <option value="4-Bedroom">4-Bedroom · 2,650 SQFT</option>
+          </select>
+          <select name="budget"
+                  class="brochure-select w-full px-4 py-3 bg-navy border border-white/20 text-white/70 text-xs tracking-wide focus:border-gold focus:outline-none transition-colors appearance-none">
+            <option value="" disabled selected>Choose Budget</option>
+            <option value="2-3 Cr">2–3 Crore BDT</option>
+            <option value="3-4 Cr">3–4 Crore BDT</option>
+            <option value="4-5 Cr">4–5 Crore BDT</option>
+            <option value="5 Cr+">5 Crore+ BDT</option>
+          </select>
+        </div>
+
+        <!-- Submit -->
+        <button id="brochure-submit-btn" type="submit"
+                class="w-full py-4 bg-gold text-navy font-semibold text-xs tracking-[0.2em] uppercase transition-all duration-300 hover:bg-white flex items-center justify-center gap-2 mt-2">
+          <!-- Spinner -->
+          <svg id="brochure-spinner" class="hidden w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+          <!-- Check -->
+          <svg id="brochure-check" class="hidden w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+          <span id="brochure-btn-label">Submit &amp; Download Brochure</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hidden PDF download anchor -->
+  <a id="brochure-dl-link"
+     href="assets/pdf/Interspeed%20Atlantis%20Brochure%20I.Ext%20Block%2C%20Bashundhara.pdf"
+     download="Atlantis Brochure — Interspeed Developments.pdf"
+     class="hidden" aria-hidden="true"></a>
 
   <!-- ── Success / Error Toast ── -->
   <div id="form-toast"

@@ -503,3 +503,28 @@ select option {
     letter-spacing: 0.08em;
   }
 }
+
+/* ── Brochure Modal ── */
+.brochure-modal {
+  transition: opacity 0.3s ease;
+}
+.brochure-modal-card {
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+.brochure-input,
+.brochure-select {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  transition: border-color 0.2s ease;
+}
+.brochure-input:focus,
+.brochure-select:focus {
+  border-color: #c9a96e;
+  outline: none;
+}
+.brochure-select option {
+  background: #1a1f2e;
+  color: #fff;
+}
