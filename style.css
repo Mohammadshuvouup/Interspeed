@@ -146,6 +146,35 @@ overflow-x: hidden;
   stroke: currentColor;
 }
 
+/* ── Feature Card Grid ── */
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  border: 1px solid #c9a96e;
+  background: #1a1f2e;
+  color: #c9a96e;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+.feature-card:hover {
+  background: #c9a96e;
+  color: #1a1f2e;
+  box-shadow: 0 4px 20px rgba(201, 169, 110, 0.25);
+}
+.feature-card-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
 /* ── Gallery Tabs ── */
 .tab-btn {
   cursor: pointer;
