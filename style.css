@@ -151,12 +151,12 @@ overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 18px 12px;
+  gap: 5px;
+  padding: 10px 8px;
   border: 1px solid #c9a96e;
   background: #1a1f2e;
   color: #c9a96e;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   letter-spacing: 0.08em;
   text-align: center;
   text-transform: uppercase;
@@ -169,8 +169,8 @@ overflow-x: hidden;
   box-shadow: 0 4px 20px rgba(201, 169, 110, 0.25);
 }
 .feature-card-icon {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   stroke: currentColor;
 }
