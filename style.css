@@ -154,7 +154,7 @@ overflow-x: hidden;
   gap: 7px;
   padding: 8px 10px;
   border: 1px solid #c9a96e;
-  background: #1a1f2e;
+  background: transparent;
   color: #c9a96e;
   font-size: 0.65rem;
   letter-spacing: 0.07em;
